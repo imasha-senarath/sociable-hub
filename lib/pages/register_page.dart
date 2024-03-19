@@ -2,15 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:sociable_hub/components/app_button.dart';
 import 'package:sociable_hub/components/app_textfield.dart';
 
-class LoginPage extends StatelessWidget {
+class RegisterPage extends StatelessWidget {
+  TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   final void Function()? onTap;
 
-  LoginPage({Key? key, this.onTap}) : super(key: key);
+  RegisterPage({Key? key, this.onTap}) : super(key: key);
 
-  void login() {}
+  void register() {
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +37,12 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 35),
               AppTextField(
+                hintText: "Username",
+                controller: userNameController,
+                obscureText: false,
+              ),
+              const SizedBox(height: 15),
+              AppTextField(
                 hintText: "Email",
                 controller: emailController,
                 obscureText: false,
@@ -56,18 +65,18 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 15),
-              AppButton(text: "Login", onTap: login),
+              AppButton(text: "Register", onTap: register),
               const SizedBox(height: 15),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Don't have an account? "),
+                  const Text("Already have an account? "),
                   GestureDetector(
                     onTap: onTap,
-                    child: const Text("Register Here",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    ),),
+                    child: const Text(
+                      "Login Here",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               )

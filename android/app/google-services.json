@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1012898539898",
+    "project_id": "socialhub-6cc8a",
+    "storage_bucket": "socialhub-6cc8a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1012898539898:android:d705364d39dc9de0e54ec3",
+        "android_client_info": {
+          "package_name": "com.imasha.sociable_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbHcoG76S-XEcO-4ubT23EPT_zUbN5IlQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
