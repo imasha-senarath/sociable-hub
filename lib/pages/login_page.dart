@@ -1,16 +1,46 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sociable_hub/components/app_button.dart';
 import 'package:sociable_hub/components/app_textfield.dart';
 
-class LoginPage extends StatelessWidget {
+import '../helper/helper_functions.dart';
+
+class LoginPage extends StatefulWidget {
+  final void Function()? onTap;
+
+  const LoginPage({Key? key, this.onTap}) : super(key: key);
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  final void Function()? onTap;
+  void login() async {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Navigator.pop(context);
+      showMessage("Fields can't be empty", context);
+    } else {
+      try {
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
 
-  LoginPage({Key? key, this.onTap}) : super(key: key);
-
-  void login() {}
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+        showMessage(e.code, context);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,11 +93,11 @@ class LoginPage extends StatelessWidget {
                 children: [
                   Text("Don't have an account? "),
                   GestureDetector(
-                    onTap: onTap,
-                    child: const Text("Register Here",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold
-                    ),),
+                    onTap: widget.onTap,
+                    child: const Text(
+                      "Register Here",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               )

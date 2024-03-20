@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:sociable_hub/auth/auth.dart';
 import 'package:sociable_hub/auth/login_or_register.dart';
 import 'package:sociable_hub/pages/login_page.dart';
 import 'package:sociable_hub/theme/dark_mode.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const LoginOrRegister(),
+      home: const AppAuth(),
       theme: lightMode,
       darkTheme: darkMode,
     );

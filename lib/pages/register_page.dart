@@ -1,18 +1,49 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sociable_hub/components/app_button.dart';
 import 'package:sociable_hub/components/app_textfield.dart';
 
-class RegisterPage extends StatelessWidget {
+import '../helper/helper_functions.dart';
+
+class RegisterPage extends StatefulWidget {
+  final void Function()? onTap;
+
+  const RegisterPage({Key? key, this.onTap}) : super(key: key);
+
+  @override
+  State<RegisterPage> createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  final void Function()? onTap;
-
-  RegisterPage({Key? key, this.onTap}) : super(key: key);
-
-  void register() {
-
+  void register() async {
+    showDialog(
+        context: context,
+        builder: (context) => const Center(
+              child: CircularProgressIndicator(),
+            ));
+    if (userNameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty) {
+      Navigator.pop(context);
+      showMessage("Fields can't be empty", context);
+    } else {
+      try {
+        UserCredential userCredential =
+            await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        
+        Navigator.pop(context);
+      } on FirebaseAuthException catch (e) {
+        Navigator.pop(context);
+        showMessage(e.code, context);
+      }
+    }
   }
 
   @override
@@ -72,7 +103,7 @@ class RegisterPage extends StatelessWidget {
                 children: [
                   const Text("Already have an account? "),
                   GestureDetector(
-                    onTap: onTap,
+                    onTap: widget.onTap,
                     child: const Text(
                       "Login Here",
                       style: TextStyle(fontWeight: FontWeight.bold),
