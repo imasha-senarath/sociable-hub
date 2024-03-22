@@ -4,6 +4,7 @@ import 'package:sociable_hub/auth/auth.dart';
 import 'package:sociable_hub/auth/login_or_register.dart';
 import 'package:sociable_hub/pages/login_page.dart';
 import 'package:sociable_hub/pages/profile_page.dart';
+import 'package:sociable_hub/pages/users_page.dart';
 import 'package:sociable_hub/theme/dark_mode.dart';
 import 'package:sociable_hub/theme/light_mode.dart';
 
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/login_register_page': (context) => const LoginOrRegister(),
         '/profile_page': (context) => ProfilePage(),
+        '/users_page': (context) => const UsersPage(),
       },
     );
   }

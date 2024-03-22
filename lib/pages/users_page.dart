@@ -18,7 +18,6 @@ class UsersPage extends StatelessWidget {
       body: StreamBuilder(
         stream: FirebaseFirestore.instance.collection("Users").snapshots(),
         builder: (context, snapshot) {
-
           if (snapshot.hasError) {
             showMessage("Something went wrong", context);
           }
@@ -29,7 +28,22 @@ class UsersPage extends StatelessWidget {
             );
           }
 
-          if(snapshot.)
+          if (snapshot.data == null) {
+            return const Text("No Date");
+          }
+
+          final users = snapshot.data?.docs;
+
+          return ListView.builder(
+              itemCount: users?.length,
+              itemBuilder: (context, index) {
+                final user = users![index];
+
+                return ListTile(
+                  title: Text(user['userName']),
+                  subtitle: Text(user['email']),
+                );
+              });
         },
       ),
     );

@@ -35,11 +35,28 @@ class ProfilePage extends StatelessWidget {
           } else if (snapshot.hasData) {
             Map<String, dynamic>? user = snapshot.data?.data();
 
-            return Column(
-              children: [
-                Text(user!['email']),
-                Text(user!['userName']),
-              ],
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.primary,
+                        borderRadius: BorderRadius.circular(24)),
+                    padding: const EdgeInsets.all(25),
+                    child: const Icon(
+                      Icons.person,
+                      size: 64,
+                    ),
+                  ),
+                  const SizedBox(height: 25),
+                  Text(
+                    user!['email'],
+                    style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  ),
+                  Text(user!['userName']),
+                ],
+              ),
             );
           } else {
             return const Text("No Data");
