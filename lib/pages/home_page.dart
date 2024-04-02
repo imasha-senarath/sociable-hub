@@ -32,12 +32,12 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         foregroundColor: Theme.of(context).colorScheme.inversePrimary,
         elevation: 0,
-        actions: [
+        /*actions: [
           IconButton(
             onPressed: logout,
             icon: const Icon(Icons.logout),
           ),
-        ],
+        ],*/
       ),
       drawer: const AppDrawer(),
       body: Column(
